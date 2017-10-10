@@ -419,43 +419,43 @@ The conversion from BSD to RBSD is a more complex process, because a binary numb
     $y_{i}$ & $y_{i-1}$ & $y_{i-2}$ & $y_{i-3}$ & $z_{i}$ & $y_{i}$ & $y_{i-1}$ & $y_{i-2}$ & $y_{i-3}$ & $z_{i}$ \\
     \hline
     \hline
-    -1 & -1 & -1 & X & 0 & 0 & 0 & X & X & 0\\
+    -1 & -1 & -1 & X & 0  &  0 & 1 & -1 & X & 0 \\
     \hline
-    & & 0 & -1 & 0 & 0 & 1 & -1 & X & 0\\
+    & & 0 & -1 & 0  & & & 0 & -1 & 0 \\
     \hline
-    & & 0 & 0 & 1 & & & 0 & -1 & 0\\
+    & & 0 & 0 & 1  &  & & 0 & 0 & 1 \\
     \hline
-    & & 0 & 1 & 1 & & & 0 & 0 & 1\\
+    & & 0 & 1 & 1  &  & & 0 & 1 & 1 \\
     \hline
-    & & 1 & X & 1 & & & 0 & 1 & 1\\
+    & & 1 & X & 1  &   & & 1 & X & 1 \\
     \hline
-    -1 & 0 & -1 & X & 1 & & & 1 & X & 1\\
+    -1 & 0 & -1 & X & 1  &  1 & -1 & -1 & X & 0 \\
     \hline
-    & & 0 & X & -1 & 1 & -1 & -1 & X & 0\\
+    & & 0 & X & -1  &  & & 0 & -1 & 0 \\
     \hline
-    & & 1 & X & -1 & & & 0 & -1 & 0\\
+    & & 1 & X & -1  &  & & 0 & 0 & 1 \\
     \hline
-    -1 & 1 & -1 & X & -1 & & & 0 & 0 & 1\\
+    -1 & 1 & -1 & X & -1  &  & & 0 & 1 & 1 \\
     \hline
-    & & 0 & -1 & -1 & & & 0 & 1 & 1\\
+    & & 0 & -1 & -1  &  & & 1 & X & 1 \\
     \hline
-    & & 0 & 0 & 0 & & & 1 & X & 1\\
+    & & 0 & 0 & 0  &  1 & 0 & -1 & X & 1 \\
     \hline
-    & & 0 & 1 & 0 & 1 & 0 & -1 & X & 1\\
+    & & 0 & 1 & 0  &  & & 0 & X & -1 \\
     \hline
-    & & 1 & X & 0 & & & 0 & X & -1\\
+    & & 1 & X & 0  &  & & 1 & X & -1 \\
     \hline
-    0 & -1 & -1 & X & -1 & & & 1 & X & -1\\
+    0 & -1 & -1 & X & -1  &  1 & 1 & -1 & X & -1 \\
     \hline
-    & & 0 & -1 & -1 & 1 & 1 & -1 & X & -1\\
+    & & 0 & -1 & -1  &  & & 0 & -1 & -1 \\
     \hline
-    & & 0 & 0 & 0 & & & 0 & -1 & -1\\
+    & & 0 & 0 & 0  &  & & 0 & 0 & 0 \\
     \hline
-    & & 0 & 1 & 0 & & & 0 & 0 & 0\\
+    & & 0 & 1 & 0  &  & & 0 & 1 & 0 \\
     \hline
-    & & 1 & X & 0 & & & 0 & 1 & 0\\
+    & & 1 & X & 0  &  & & 1 & X & 0 \\
     \hline
-    & & & & & & & 1 & X & 0\\
+    0 & 0 & X & X & 0  &  & & & & \\
     \hline
   \end{tabular}
 \end{table}
@@ -471,7 +471,7 @@ Table III can be used to convert a BSD or RBSD number into its Binary form. The 
   \label{tab:table3}
   \begin{tabular}{|c|c||c|c|}
     \hline
-    BSD ($Z$) & carry\_in $c$ & Binary $B$ & carry\_out $C$ \\
+    BSD ($Z$) & carry\_in ($c$) & Binary ($B$) & carry\_out ($C$) \\
     \hline
     \hline
     -1 & 0 & 1 & 1\\
@@ -556,7 +556,7 @@ Before dealing with Binary numbers, we first tackle the easier problem of design
   \end{tabular}
 \end{table}
 
-Table IV can transformed into a Product-of-Sum form to implement an electronic circuit that performs Carry-Free RBSD Addition. The most optimized Product-of-Sum form of Table IV is given in equations (10) and (11):
+Table IV can transformed into a Product-of-Sum form to implement an electronic circuit that performs Carry-Free RBSD Addition. The optimized Product-of-Sum form of Table IV is given in equations (10) and (11):
 
 \vspace{-1em}
 \begin{align}
@@ -599,7 +599,7 @@ The following subsections describe the carry-free implementations of addition an
 
 A naive way of performing the addition of two binary numbers is by simply connecting a Binary-to-RBSD Converter module in cascade to the Carry-Free Adder for RBSD Numbers, designed previously in Section IV.A. Although this is functionally correct, a better approach would be to combine the truth tables of these two modules, and make a single truth table that takes as input binary digits, and produces their sum.
 
-Thus, a new truth table, Table V, is constructed. The inputs consist of three consecutive bits each of the two input binary numbers, $A$ and $B$, since every bit of an RBSD number depends on two bits in the binary number, and RBSD addition requires two RBSD bits. So there are 64 combinations of binary inputs to be taken care of. Each combination results in two RBSD numbers, which then needed to be added using Table IV. The output sum bit is placed in the most significant position among the three input positions. The columns in Table V are respectively $A_{i}$, $A_{i-1}$, $_{Ai-}2$, $B_{i}$, $_{Bi-}1$, $B_{i-2}$, and the sum $S_{i}$.
+Thus, a new truth table, Table V, is constructed. The inputs consist of three consecutive bits each of the two input binary numbers, $A$ and $B$, since every bit of an RBSD number depends on two bits in the binary number, and RBSD addition requires two RBSD bits. So there are 64 combinations of binary inputs to be taken care of. Each combination results in two RBSD numbers, which then needed to be added using Table IV. The output sum bit is placed in the most significant position among the three input positions. The columns in Table V are respectively $A_{i}$, $A_{i-1}$, $A_{i-2}$, $B_{i}$, $B_{i-1}$, $B_{i-2}$, and the sum $S_{i}$.
 
 Then Table V was simplified into the optimal Product-of-Sum form as given in equations (19) and (20):
 
@@ -641,7 +641,7 @@ S_{i}^{v} ={} &S0 \ . \ S1 \ . \ S2 \ . \ S3 \ . \ S4 \ . \ S5 \ . \ S6 \ . \ (A
 \vspace{-.5em}
 \begin{table}[h!]
   \centering
-  \caption{BSD to RBSD Conversion}
+  \caption{Carry-Free Addition of Binary Numbers}
   \label{tab:table5}
   \begin{tabular}{|c|c|c|c|c|c||c|||c|c|c|c|c|c||c|}
     \hline
@@ -817,9 +817,9 @@ Table VII lists the path delays of the individual modules in the Carry-Free Mult
 
 \section{Analysis}
 
-\subsection{Use of 2’s Complement binary numbers}
+\subsection{Use of 2's Complement binary numbers}
 
-Throughout the paper, binary numbers have been assumed to be positive, where $n$-bits of the binary number convert to $2*(n+1)$ bits of the RBSD number ($n+1$ each of sign and value bits). However, negative numbers, i.e. the possible use of binary numbers as being in their 2’s complement forms, has not been explored. The good news here is that this incorporation is particularly easy. In its 2’s complement form, there shall be no increase in number of bits in the binary number's conversion to RBSD, since it already has an extra bit included. If the number is negative, the most significant bit of its RBSD form shall inevitably be -1. Thus, the number of bits would increase to just $2n$.
+Throughout the paper, binary numbers have been assumed to be positive, where $n$-bits of the binary number convert to $2*(n+1)$ bits of the RBSD number ($n+1$ each of sign and value bits). However, negative numbers, i.e. the possible use of binary numbers as being in their 2's complement forms, has not been explored. The good news here is that this incorporation is particularly easy. In its 2's complement form, there shall be no increase in number of bits in the binary number's conversion to RBSD, since it already has an extra bit included. If the number is negative, the most significant bit of its RBSD form shall inevitably be -1. Thus, the number of bits would increase to just $2n$.
 
 \subsection{Carry Free Adder combined with BSD-to-RBSD converter}
 
