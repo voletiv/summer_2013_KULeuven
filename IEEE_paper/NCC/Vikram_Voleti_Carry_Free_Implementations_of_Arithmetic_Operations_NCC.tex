@@ -791,9 +791,8 @@ Table VI lists the comparison of computation times of addition and multiplicatio
 
 Table VI also lists the path delay and LUT usage for the carry-free implementation of multiplication. As can be seen, carry-free multiplication takes lesser time than even standard addition, it can be inferred that it takes significantly lesser time than standard multiplication.
 
-Table VII lists the path delays of the individual modules in the Carry-Free Multiplier, in ascending order of time taken. It can be observed that the most time-consuming module is the $BSD\_to\_Bin33$ module, which involves carry-full operation. All carry-free operations clearly take less than a third of the time taken by a simple BSD to binary conversion. The advantage of carry-free operation is highlighted in this result.
+Table VII lists the path delays of individual modules in the Carry-Free Multiplier, in ascending order of time taken. It can be observed that the most time-consuming module is the $BSD\_to\_Bin33$ module, which involves carry-full operation. All carry-free operations clearly take less than a third of the time taken by a simple BSD to binary conversion. The advantage of carry-free operation is highlighted in this result.
 
-\vspace{-.5em}
 \begin{table}[h!]
   \centering
   \caption{Comparison of Results}
@@ -813,7 +812,6 @@ Table VII lists the path delays of the individual modules in the Carry-Free Mult
   \end{tabular}
 \end{table}
 
-\vspace{-.5em}
 \begin{table}[h!]
   \centering
   \caption{Path Delays in Carry-Free Multiplication}
@@ -841,7 +839,7 @@ Throughout the paper, binary numbers have been assumed to be positive, where $n$
 
 \subsection{Carry Free Adder + BSD-to-RBSD converter}
 
-The field of RBSD numbers is not closed under addition, so the sum of two RBSD numbers results in a BSD number that is not necessarily RBSD. Since many applications require further use of the sum (e.g. multiplication), it is imperative to convert it into RBSD before using it elsewhere. Fortunately, BSD to RBSD conversion is combinational, so it does not delay the circuit much. This is why every Carry-Free Adder is followed by a BSD-to-RBSD converter in the Carry-Free Multiplier (Figure 2).
+The field of RBSD numbers is not closed under addition, so the sum of two RBSD numbers results in a BSD number that is not necessarily RBSD. Since many applications require further use of the sum (e.g. multiplication), it is imperative to convert it into RBSD before using it elsewhere. Fortunately, BSD to RBSD conversion is combinational, so it does not delay the circuit much. This is why every Carry-Free Adder is followed by a BSD-to-RBSD converter in the Carry-Free Multiplier (Figure 1).
 
 It can be argued that a Carry-Free Adder and a BSD-to-RBSD converter should be combined to make one single truth table, so that there is no delay in adding RBSD or binary numbers into an RBSD sum. However, making such a concise table is quite painful. The BSD-to-RBSD converter takes 4 consecutive digits of the input BSD number, and produces 1 output digit at the most significant digit position. A Carry-Free Adder takes 2 consecutive digits from each RBSD input, or 3 from each binary input, to produce one output digit. Since these act as inputs to the BSD-to-RBSD Converter, the Carry-Free Adders require 5 consecutive RBSD digits, or 6 consecutive binary bits to produce one output digit. This leads to a table having $3^5 =$ 243 rows in case of RBSD Adder, and $2^6 =$ 64 rows in case of Binary adder. It is practically infeasible, and quite unnecessary, to manually construct a Product-of-Sum form for the combined truth table.
 
