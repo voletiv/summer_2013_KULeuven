@@ -606,7 +606,7 @@ A naive way of performing the addition of two binary numbers is by simply connec
 
 Thus, a new truth table, Table V, is constructed. The inputs consist of three consecutive bits each of the two input binary numbers, $A$ and $B$, since every bit of an RBSD number depends on two bits in the binary number, and RBSD addition at a bit requires two RBSD bits. So there are 64 combinations of binary inputs to be taken care of. Each combination results in two RBSD numbers, which then needed to be added using Table IV. The output sum bit is placed in the most significant position among the three input positions. The columns in Table V are respectively $A_{i}$, $A_{i-1}$, $A_{i-2}$, $B_{i}$, $B_{i-1}$, $B_{i-2}$, and the sum $S_{i}$.
 
-Then Table V was simplified into the optimal Product-of-Sum form as given in equations (19) and (20):
+Table V was simplified into the optimal Product-of-Sum form, shown in equations (19) and (20):
 
 \vspace{-1em}
 \begin{align}
@@ -781,7 +781,7 @@ Figure 1 is the circuit implementation of the Karatsuba Algorithm, for carry-fre
 
 \section{Results}
 
-All circuits were designed in Verilog and run using Xilinx-9 on a Virtex-5 FPGA 9(5vlx30ff324-3). All modules were also coded in Octave to verify their computations.
+All circuits were designed in Verilog and run using Xilinx-9 on a Virtex-5 FPGA 9 (5vlx30ff324-3). All modules were also coded in Octave to verify their computations.
 
 \subsection{Addition}
 
